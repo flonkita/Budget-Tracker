@@ -1,13 +1,135 @@
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Vite + TS</title>
-	</head>
-	<body>
-		<div id="app"></div>
-		<script type="module" src="/src/main.ts"></script>
-	</body>
+<html lang="fr" class="font-sans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Budget Tracker</title>
+    <script type="module" src="/src/main.ts" defer></script>
+  </head>
+  <body class="bg-slate-50">
+    <main class="max-w-2xl mx-auto my-10">
+      <h1 class="text-2xl my-8">Budget Tracker</h1>
+
+      <form class="p-4 rounded bg-white shadow flex items-center gap-4">
+        <label for="salary">Salaire mensuel ( en euros )</label>
+        <input
+          type="number"
+          id="salary"
+          name="salary"
+          min="0"
+          max="999999"
+          step="1"
+          class="grow px-3 py-2 border rounded border-slate-300 text-right"
+          required
+        />
+        <span>€</span>
+      </form>
+
+      <button
+        type="button"
+        class="my-4 w-full p-3 text-center text-indigo-50 bg-indigo-600 hover:text-indigo-600 hover:bg-indigo-50"
+		data-modal-id = "add-operation-modal"
+      >
+        Ajouter une opération
+      </button>
+
+      <table class="w-full p-4 rounded bg-white shadow">
+        <thead class="bg-indigo-50 text-indigo-600 font-normal">
+          <tr>
+            <th class="p-2 border border-slate-200 text-left font-medium">
+              Date
+            </th>
+            <th class="p-2 border border-slate-200 text-left font-medium">
+              Description
+            </th>
+            <th class="p-2 border border-slate-200 text-right font-medium">
+              Crédit
+            </th>
+            <th class="p-2 border border-slate-200 text-right font-medium">
+              Débit
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="px-3 py-2 text-left">Dim 10 fév 22:02</td>
+            <td class="px-3 py-2 text-left">Netflix</td>
+            <td class="px-3 py-2 text-right"></td>
+            <td class="px-3 py-2 text-right">5,99€</td>
+          </tr>
+          <tr>
+            <td class="px-3 py-2 text-left">Dim 10 fév 22:02</td>
+            <td class="px-3 py-2 text-left">CAF</td>
+            <td class="px-3 py-2 text-right">9 482,67€</td>
+            <td class="px-3 py-2 text-right"></td>
+          </tr>
+        </tbody>
+        <tfoot class="bg-indigo-50 text-indigo-600 font-bold">
+          <tr>
+            <td class="p-3 text-right uppercase" colspan="2">Total Mensuel</td>
+            <td class="p-3 text-right">Total crédit</td>
+            <td class="p-3 text-right">Total Débit</td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <dialog id="add-operation-modal">
+        <h2>Ajouter une opération</h2>
+        <button type="button" data-close>Fermer</button>
+        <form class="p-4 rounded">
+          <label for="operation-date">Date</label>
+          <input
+            type="datetime-local"
+            id="operation-date"
+            name="operation-date"
+            required
+          />
+
+          <label for="operation-description">Description</label>
+          <input
+            type="text"
+            id="operation-description"
+            name="operation-description"
+            required
+          />
+
+          <fieldset>
+            <legend>Type d'Opération</legend>
+            <label for="operation-type--credit">Crédit</label>
+            <input
+              type="number"
+              id="operation-type--credit"
+              name="operation-type--credit"
+              min="0"
+              max="999999"
+              step="0.01"
+            />
+            <label for="operation-type--debit">Débit</label>
+            <input
+              type="number"
+              id="operation-type--debit"
+              name="operation-type--debit"
+              min="0"
+              max="999999"
+              step="0.01"
+            />
+          </fieldset>
+
+          <label for="operation-amount">Montant</label>
+          <input
+            type="number"
+            id="operation-amount"
+            name="operation-amount"
+            min="0"
+            max="999999"
+            step="0.01"
+            required
+          />
+
+          <button type="submit">Ajouter</button>
+          <button type="reset">Effacer</button>
+        </form>
+      </dialog>
+    </main>
+  </body>
 </html>
